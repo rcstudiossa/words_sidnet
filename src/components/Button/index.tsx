@@ -1,12 +1,13 @@
 import React, { FC, ReactNode, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { darken } from "polished";
 
 import theme from "../../theme";
 
 interface ContainerProps {
   children: ReactNode;
-  bgColor: string;
+  color: string;
+  variant?: string;
   margin?: string;
   onClick?: Function;
 }
@@ -14,18 +15,35 @@ interface ContainerProps {
 const Container: FC<ContainerProps> = styled("div")<ContainerProps>`
   display: flex;
   height: ${({ theme }) => theme.sizing.regular};
-  background-color: ${({ bgColor }) => bgColor};
+  background-color: ${({ theme, color }) => theme.colors.primary[`${color}`]};
+  color: ${({ theme, color }) => (color === "dark" ? theme.colors.white : theme.colors.primary.dark)};
+  margin-left: ${({ theme, margin }) => theme.spacing[`${margin}`]};
   padding: ${({ theme }) => theme.spacing.regular};
   align-items: center;
   justify-content: space-between;
   border-radius: ${({ theme }) => theme.sizing.xxxsmall};
-  margin: ${({ theme, margin }) => theme.spacing[`${margin}`]};
   cursor: pointer;
-  :hover,
-  :focus {
-    background-color: ${({ bgColor }) => darken(0.1, bgColor)};
-  }
-  transition: background-color 0.2s;
+  ${({ variant }) =>
+    variant === "text" &&
+    css`
+      color: ${({ theme }) => theme.colors.primary.dark};
+      background-color: transparent;
+      :hover,
+      :focus {
+        text-decoration: underline;
+      }
+    `};
+  ${({ variant }) =>
+    variant === "filled" &&
+    css`
+      :hover,
+      :focus {
+        color: ${theme.colors.white};
+        background-color: ${darken(0.1, theme.colors.primary.dark)};
+      }
+    `};
+
+  transition: color 0.2s, background-color 0.2s;
 `;
 
 interface TextProps {
@@ -34,32 +52,39 @@ interface TextProps {
 }
 
 const Text: FC<TextProps> = styled("p")<TextProps>`
-  color: ${({ textColor }) => textColor};
   font-weight: 500;
 `;
 
 interface ButtonProps {
   text: string;
   color?: "light" | "dark";
+  variant?: "filled" | "text";
   margin?: string;
   onClick?: Function;
 }
 
-const Button: FC<ButtonProps> = ({ text, color, margin, onClick }) => {
+const Button: FC<ButtonProps> = ({ text, color, variant, margin, onClick }) => {
   let textColor = theme.colors.primary.dark;
   let bgColor = theme.colors.primary.light;
+
+  if (!color) {
+    color = "dark";
+  }
+  if (!variant) {
+    variant = "filled";
+  }
+
+  if (variant === "text") {
+    bgColor = "transparent";
+    textColor = theme.colors.primary.dark;
+  }
   if (color === "dark") {
     textColor = theme.colors.white;
     bgColor = theme.colors.primary.dark;
   }
 
-  let propMargin = "null";
-  if (margin) {
-    propMargin = margin;
-  }
-
   return (
-    <Container margin={propMargin} bgColor={bgColor} onClick={onClick}>
+    <Container margin={margin} color={color} variant={variant} onClick={onClick}>
       <Text textColor={textColor}>{text}</Text>
     </Container>
   );

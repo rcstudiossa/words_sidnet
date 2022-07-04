@@ -8,13 +8,11 @@ interface ContainerProps {
 }
 
 const Container: FC<ContainerProps> = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: row;
   width: 48em;
-  height: ${({ theme }) => theme.sizing.xxlarge};
   background-color: ${({ theme }) => theme.colors.white};
-  padding-left: ${({ theme }) => theme.spacing.regular};
+  padding: ${({ theme }) => theme.spacing.xsmall};
   align-items: center;
   border-radius: ${({ theme }) => theme.sizing.xxxsmall};
   border: 1px solid ${({ theme }) => theme.colors.grey.g400};
@@ -34,13 +32,14 @@ const Input: FC<InputProps> = styled.input`
   ::placeholder {
     color: ${({ theme }) => theme.colors.grey.g300};
   }
+  margin: 0 ${({ theme }) => theme.spacing.smalls};
 `;
 
 const TextInput: FC<InputProps> = ({ placeholder, type, onChange, onButtonClick }) => {
   return (
     <Container>
       <Input placeholder={placeholder} type={type} onChange={onChange} />
-      <Button text="Paste" color="dark" margin="xxsmall" onClick={onButtonClick} />
+      <Button text="Paste" color="dark" onClick={onButtonClick} />
     </Container>
   );
 };

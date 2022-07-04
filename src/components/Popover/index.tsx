@@ -24,16 +24,17 @@ const Container: FC<SynonymsPopoverProps> = styled("div")<SynonymsPopoverProps>`
   margin-bottom: ${({ theme }) => theme.spacing.xxsmall};
   padding: ${({ theme }) => theme.spacing.xxxsmall} 0;
   ::-webkit-scrollbar {
-    width: 0.9rem !important;
+    width: 1rem;
   }
   ::-webkit-scrollbar-track {
     background: ${({ theme }) => theme.colors.white};
   }
   ::-webkit-scrollbar-thumb {
     background: ${({ theme }) => theme.colors.grey.g400};
-    border-radius: 0.45em !important;
+    border-radius: 0.5em;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.025);
     -webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.025);
-    border: 0.2em solid ${({ theme }) => theme.colors.white};
+    border: ${({ theme }) => theme.spacing.xxxsmall} solid ${({ theme }) => theme.colors.white};
   }
   ::-webkit-scrollbar-thumb:hover {
     background: ${({ theme }) => theme.colors.grey.g300};
@@ -49,20 +50,23 @@ const SynonymItem: FC<SynonymItemProps> = styled.div`
   flex: 1;
   display: flex;
   border-radius: ${({ theme }) => theme.sizing.xxxsmall};
-  margin: ${({ theme }) => theme.spacing.xxxsmall};
-  padding: ${({ theme }) => `${theme.spacing.xxxsmall} ${theme.spacing.xsmall}`};
+  margin-left: ${({ theme }) => theme.spacing.xxxsmall};
+  padding: ${({ theme }) => `${theme.spacing.xxsmall} ${theme.spacing.xsmall}`};
+  padding-right: 0;
+  color: ${({ theme }) => theme.colors.grey.g100};
   cursor: pointer;
   :hover,
   :focus {
     background-color: ${({ theme }) => theme.colors.primary.light};
     font-weight: 700;
+    color: ${({ theme }) => theme.colors.primary.dark};
   }
+  transition: font-weight 0.2s, background-color 0.1s;
 `;
 
 const SynonymText: FC<{ children?: ReactNode }> = styled.p`
   flex: 1;
   font-size: ${({ theme }) => theme.sizing.regular};
-  color: ${({ theme }) => theme.colors.grey.g100};
   white-space: pre-line;
 `;
 

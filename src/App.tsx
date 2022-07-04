@@ -6,14 +6,19 @@ import theme from "./theme";
 
 import HomePage from "./pages/HomePage";
 
-const Container: FC<{ children: ReactNode }> = styled.div`
+interface ContainerProps {
+  children: ReactNode;
+  className?: string;
+}
+
+const Container: FC<ContainerProps> = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
 const App: React.FC = () => {
   return (
-    <Container>
+    <Container className="app">
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <GlobalStyle />

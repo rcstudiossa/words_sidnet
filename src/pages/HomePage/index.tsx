@@ -2,6 +2,7 @@ import React, { FC, ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 
 import styled from "styled-components";
+import writerIllustration from "../../assets/writer-illustration.svg";
 import Header from "../../components/Header";
 import Title from "../../components/Title";
 import TextInput from "../../components/TextInput";
@@ -15,14 +16,40 @@ interface ContainerProps {
 
 const Container: FC<ContainerProps> = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
 `;
 
 const Content: FC<{ children?: ReactNode }> = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: ${({ theme }) => theme.spacing.xxlarge};
+`;
+
+const Spacer: FC = styled.div`
+  flex: 1;
+  display: flex;
+`;
+
+const Illustration: FC = styled.div`
+  position: relative;
+  top: -7.1em;
+  right: ${({ theme }) => theme.spacing.xxlarge};
+  width: 16em;
+  height: 12em;
+  background-image: url(${writerIllustration});
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top right;
+`;
+
+const Footer: FC<{ children?: ReactNode }> = styled.div`
+  height: 10em;
+  display: flex;
+  background-color: ${({ theme }) => theme.colors.primary.light};
+  justify-content: flex-end;
+  margin-top: ${({ theme }) => theme.spacing.xxlarge};
 `;
 
 const HomePage: FC = () => {
@@ -89,6 +116,10 @@ const HomePage: FC = () => {
         <Popover selectedPosition={selectedPosition} synonyms={synonyms} updateWord={updateWord} />
         <Output rawText={displayedText} getSelection={getSelection} />
       </Content>
+      <Spacer />
+      <Footer>
+        <Illustration />
+      </Footer>
     </Container>
   );
 };

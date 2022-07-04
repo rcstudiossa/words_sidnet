@@ -9,10 +9,8 @@ interface ContainerProps {
 }
 
 const Container: FC<ContainerProps> = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: row;
-  height: ${({ theme }) => theme.sizing.regular};
   padding: ${({ theme }) => `${theme.sizing.small} ${theme.sizing.xxlarge}`};
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey.g500};
 `;
@@ -25,11 +23,16 @@ const Logo: FC = styled.div`
   background-size: 8em;
 `;
 
+const goToGithub = () => {
+  window.open("https://github.com/rcstudiossa/words_sidnet");
+};
+
 const Header: FC = () => {
   return (
     <Container>
       <Logo />
-      <Button text="Go Premium" color="light" />
+      <Button text="Check GitHub" variant="text" onClick={goToGithub} />
+      <Button text="Go Premium" color="light" margin="xsmall" />
     </Container>
   );
 };

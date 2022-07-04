@@ -12,6 +12,12 @@ const colors = {
     g500: "#F2F2F2",
   },
   white: "#FFFFFF",
+  auxiliary: {
+    info: "#3B7DFF",
+    success: "#33AF00",
+    warning: "#EC870F",
+    error: "#DB634F",
+  },
 };
 
 export default colors;

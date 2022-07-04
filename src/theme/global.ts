@@ -9,8 +9,8 @@ export default createGlobalStyle`
        font-family: 'Crimson Pro', 'Roboto', sans-serif; 
    }
 
-   #root{
-       margin: 0;
+   html, body, #root, .app {
+        height: 100%
    }
 
    input {
