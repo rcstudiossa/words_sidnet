@@ -11,6 +11,7 @@ const colors = {
     g400: "#E0E0E0",
     g500: "#F2F2F2",
   },
+  white: "#FFFFFF",
 };
 
 export default colors;

@@ -1,11 +1,11 @@
 import colors from "./colors";
 import sizes from "./sizes";
-import margins from "./margins";
+import spacing from "./spacing";
 
 const theme = {
   colors,
   sizes,
-  margins,
+  spacing,
 };
 
 export default theme;

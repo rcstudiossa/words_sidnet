@@ -22,14 +22,14 @@ const Logo: FC = styled.div`
   background-image: url(${logo});
   background-repeat: no-repeat;
   background-position: center left;
-  background-size: 20%;
+  background-size: 8em;
 `;
 
 const Header: FC = () => {
   return (
     <Container>
       <Logo />
-      <Button text="Go Premium" />
+      <Button text="Go Premium" color="light" />
     </Container>
   );
 };

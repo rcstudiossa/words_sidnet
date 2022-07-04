@@ -8,7 +8,22 @@ export default createGlobalStyle`
        box-sizing:border-box;
        font-family: 'Crimson Pro', 'Roboto', sans-serif; 
    }
+
    #root{
-       margin:0 auto;
+       margin: 0;
+   }
+
+   input {
+        outline: none;
+        border:none;
+        background-image:none;
+        background-color:transparent;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;  
+   }
+
+   ul {
+        list-style-type: none;
    }
 `;
