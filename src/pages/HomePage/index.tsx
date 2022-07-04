@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 import styled from "styled-components";
 import writerIllustration from "../../assets/writer-illustration.svg";
@@ -24,7 +24,26 @@ const Content: FC<{ children?: ReactNode }> = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing.xxlarge};
+  padding-top: ${({ theme }) => theme.spacing.xxlarge};
+  overflow-y: auto;
+  height: calc(100vh - 3.563em);
+  max-height: calc(100vh - 3.563em);
+
+  ::-webkit-scrollbar {
+    width: 0.55rem;
+  }
+  ::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.colors.white};
+  }
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.grey.g400};
+    border-radius: 0.275em;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.025);
+    -webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.025);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${({ theme }) => theme.colors.grey.g300};
+  }
 `;
 
 const Spacer: FC = styled.div`
@@ -45,7 +64,9 @@ const Illustration: FC = styled.div`
 `;
 
 const Footer: FC<{ children?: ReactNode }> = styled.div`
-  height: 10em;
+  width: 100%;
+  flex: 1;
+  height: 8em;
   display: flex;
   background-color: ${({ theme }) => theme.colors.primary.light};
   justify-content: flex-end;
@@ -92,16 +113,24 @@ const HomePage: FC = () => {
   };
 
   const fetchSynonyms = async (word: string) => {
-    const { data, status } = await axios({
-      method: "get",
-      baseURL: BASE_URL,
-      url: `/${word.toLowerCase()}/synonyms`,
-      headers: {
-        "X-RapidAPI-Key": API_KEY,
-      },
-    });
-    setSynonyms(data.synonyms);
-    setResponseCode(status);
+    try {
+      const { data, status } = await axios({
+        method: "get",
+        baseURL: BASE_URL,
+        url: `/${word.toLowerCase()}/synonyms`,
+        headers: {
+          "X-RapidAPI-Key": API_KEY,
+        },
+      });
+      setSynonyms(data.synonyms);
+      setResponseCode(status);
+    } catch (err) {
+      const error = err as AxiosError;
+      setSynonyms([]);
+      if (error.response?.status) {
+        setResponseCode(error.response.status);
+      }
+    }
   };
 
   const updateWord = (synonym: string) => {
@@ -127,11 +156,11 @@ const HomePage: FC = () => {
           responseCode={responseCode}
         />
         <Output rawText={displayedText} getSelection={getSelection} />
+        <Spacer />
+        <Footer>
+          <Illustration />
+        </Footer>
       </Content>
-      <Spacer />
-      <Footer>
-        <Illustration />
-      </Footer>
     </Container>
   );
 };

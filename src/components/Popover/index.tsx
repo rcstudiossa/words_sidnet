@@ -150,7 +150,7 @@ const Popover: FC<PopoverProps> = ({ selectedPosition, synonyms, updateWord, res
         setDataStatus("notFound");
       }
     }
-  }, [synonyms]);
+  }, [responseCode, synonyms]);
 
   useEffect(() => {
     function handleClickOutside(event: any): void {

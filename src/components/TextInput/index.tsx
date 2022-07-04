@@ -32,7 +32,7 @@ const Input: FC<InputProps> = styled.input`
   ::placeholder {
     color: ${({ theme }) => theme.colors.grey.g300};
   }
-  margin: 0 ${({ theme }) => theme.spacing.smalls};
+  margin: 0 ${({ theme }) => theme.spacing.small};
 `;
 
 const TextInput: FC<InputProps> = ({ placeholder, type, onChange, onButtonClick }) => {
