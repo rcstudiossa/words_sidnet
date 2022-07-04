@@ -61,9 +61,12 @@ const HomePage: FC = () => {
   const [selectedPosition, setSelectedPosition] = useState([0, 0]);
   const [rangeToReplace, setRangeToReplace] = useState([0, 0]);
   const [synonyms, setSynonyms] = useState([]);
+  const [responseCode, setResponseCode] = useState(0);
 
   useEffect(() => {
     if (selectedText.length > 1 && selectedText.split(" ").length === 1 && /[a-zA-Z]/.test(selectedText)) {
+      setSynonyms([]);
+      setResponseCode(0);
       fetchSynonyms(selectedText);
     }
   }, [selectedText]);
@@ -89,12 +92,16 @@ const HomePage: FC = () => {
   };
 
   const fetchSynonyms = async (word: string) => {
-    const { data } = await axios.get(`${BASE_URL}/${word.toLowerCase()}/synonyms`, {
+    const { data, status } = await axios({
+      method: "get",
+      baseURL: BASE_URL,
+      url: `/${word.toLowerCase()}/synonyms`,
       headers: {
         "X-RapidAPI-Key": API_KEY,
       },
     });
     setSynonyms(data.synonyms);
+    setResponseCode(status);
   };
 
   const updateWord = (synonym: string) => {
@@ -113,7 +120,12 @@ const HomePage: FC = () => {
           onChange={getTextInput}
           onButtonClick={getClipboardContent}
         />
-        <Popover selectedPosition={selectedPosition} synonyms={synonyms} updateWord={updateWord} />
+        <Popover
+          selectedPosition={selectedPosition}
+          synonyms={synonyms}
+          updateWord={updateWord}
+          responseCode={responseCode}
+        />
         <Output rawText={displayedText} getSelection={getSelection} />
       </Content>
       <Spacer />

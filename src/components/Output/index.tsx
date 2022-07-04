@@ -36,8 +36,8 @@ const InfoContainer: FC<InfoContainerProps> = styled("div")<InfoContainerProps>`
   flex: 1;
   display: flex;
   padding: ${({ theme }) => theme.spacing.xsmall} ${({ theme }) => theme.spacing.large};
-  background-color: ${({ theme, type }) => transparentize(0.925, theme.colors.auxiliary[`info`])};
-  color: ${({ theme, type }) => transparentize(0.4, theme.colors.auxiliary[`info`])};
+  background-color: ${({ theme, type }) => transparentize(0.925, theme.colors.auxiliary[`${type}`])};
+  color: ${({ theme, type }) => transparentize(0.4, theme.colors.auxiliary[`${type}`])};
   border-radius: ${({ theme }) => theme.sizing.xxxsmall};
 `;
 
@@ -61,7 +61,7 @@ interface OutputProps {
 
 const Output: FC<OutputProps> = ({ rawText, getSelection }) => {
   const [info, setInfo] = useState({
-    type: "",
+    type: "info",
     message: "",
   });
 
@@ -79,7 +79,7 @@ const Output: FC<OutputProps> = ({ rawText, getSelection }) => {
       };
     } else {
       tempInfo = {
-        type: "",
+        type: "info",
         message: "",
       };
     }
