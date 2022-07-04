@@ -13,12 +13,12 @@ interface ContainerProps {
 
 const Container: FC<ContainerProps> = styled("div")<ContainerProps>`
   display: flex;
-  height: ${({ theme }) => theme.sizes.regular};
+  height: ${({ theme }) => theme.sizing.regular};
   background-color: ${({ bgColor }) => bgColor};
   padding: ${({ theme }) => theme.spacing.regular};
   align-items: center;
   justify-content: space-between;
-  border-radius: ${({ theme }) => theme.sizes.xxxsmall};
+  border-radius: ${({ theme }) => theme.sizing.xxxsmall};
   margin: ${({ theme, margin }) => theme.spacing[`${margin}`]};
   cursor: pointer;
   :hover,

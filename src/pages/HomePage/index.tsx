@@ -8,7 +8,12 @@ import TextInput from "../../components/TextInput";
 import Popover from "../../components/Popover";
 import Output from "../../components/Output";
 
-const Container: FC<{ children?: ReactNode }> = styled.div`
+interface ContainerProps {
+  children: ReactNode;
+  onClick?: Function;
+}
+
+const Container: FC<ContainerProps> = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -31,7 +36,7 @@ const HomePage: FC = () => {
   const [synonyms, setSynonyms] = useState([]);
 
   useEffect(() => {
-    if (selectedText) {
+    if (selectedText.length > 1 && selectedText.split(" ").length === 1 && /[a-zA-Z]/.test(selectedText)) {
       fetchSynonyms(selectedText);
     }
   }, [selectedText]);
@@ -48,16 +53,16 @@ const HomePage: FC = () => {
   const getSelection = () => {
     const selection = window.getSelection();
     if (selection && selection.toString() !== selectedText) {
-      setSelectedText(selection.toString());
+      setSelectedText(selection.toString().trim());
+      const { startOffset } = selection.getRangeAt(0);
+      setRangeToReplace([startOffset, startOffset + selection.toString().trim().length]);
       const { x, y, width } = selection.getRangeAt(0).getBoundingClientRect();
-      const { startOffset, endOffset } = selection.getRangeAt(0);
-      setRangeToReplace([startOffset, endOffset]);
       setSelectedPosition([x + width / 2, y]);
     }
   };
 
   const fetchSynonyms = async (word: string) => {
-    const { data } = await axios.get(`${BASE_URL}/${word}/synonyms`, {
+    const { data } = await axios.get(`${BASE_URL}/${word.toLowerCase()}/synonyms`, {
       headers: {
         "X-RapidAPI-Key": API_KEY,
       },

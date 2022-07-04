@@ -1,10 +1,10 @@
 import colors from "./colors";
-import sizes from "./sizes";
+import sizing from "./sizing";
 import spacing from "./spacing";
 
 const theme = {
   colors,
-  sizes,
+  sizing,
   spacing,
 };
 

@@ -20,7 +20,7 @@ interface TitleProps {
 }
 
 const TitleText: FC<TitleProps> = styled("p")<TitleProps>`
-  font-size: ${({ theme }) => theme.sizes.xxxlarge};
+  font-size: ${({ theme }) => theme.sizing.xxxlarge};
   color: ${({ theme }) => theme.colors.grey.g100};
   font-weight: 700;
   white-space: pre-wrap;
@@ -34,7 +34,7 @@ const TitleText: FC<TitleProps> = styled("p")<TitleProps>`
 
 const SubtitleText: FC<{ children: ReactNode }> = styled.p`
   display: flex;
-  font-size: ${({ theme }) => theme.sizes.large};
+  font-size: ${({ theme }) => theme.sizing.large};
   color: ${({ theme }) => theme.colors.grey.g200};
   font-weight: 400;
 `;

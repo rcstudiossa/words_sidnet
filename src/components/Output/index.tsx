@@ -19,7 +19,7 @@ const Container: FC<ContainerProps> = styled.div`
 const TextOutput: FC<{ children?: ReactNode }> = styled.p`
   flex: 1;
   display: flex;
-  font-size: ${({ theme }) => theme.sizes.large};
+  font-size: ${({ theme }) => theme.sizing.large};
   color: ${({ theme }) => theme.colors.grey.g100};
   line-height: 1.25em;
   white-space: pre-line;

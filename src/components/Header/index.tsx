@@ -12,8 +12,8 @@ const Container: FC<ContainerProps> = styled.div`
   flex: 1;
   display: flex;
   flex-direction: row;
-  height: ${({ theme }) => theme.sizes.regular};
-  padding: ${({ theme }) => `${theme.sizes.small} ${theme.sizes.xxlarge}`};
+  height: ${({ theme }) => theme.sizing.regular};
+  padding: ${({ theme }) => `${theme.sizing.small} ${theme.sizing.xxlarge}`};
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey.g500};
 `;
 

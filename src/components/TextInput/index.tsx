@@ -12,11 +12,11 @@ const Container: FC<ContainerProps> = styled.div`
   display: flex;
   flex-direction: row;
   width: 48em;
-  height: ${({ theme }) => theme.sizes.xxlarge};
+  height: ${({ theme }) => theme.sizing.xxlarge};
   background-color: ${({ theme }) => theme.colors.white};
   padding-left: ${({ theme }) => theme.spacing.regular};
   align-items: center;
-  border-radius: ${({ theme }) => theme.sizes.xxxsmall};
+  border-radius: ${({ theme }) => theme.sizing.xxxsmall};
   border: 1px solid ${({ theme }) => theme.colors.grey.g400};
 `;
 
@@ -30,7 +30,7 @@ interface InputProps {
 const Input: FC<InputProps> = styled.input`
   flex: 1;
   color: ${({ theme }) => theme.colors.grey.g100};
-  font-size: ${({ theme }) => theme.sizes.large};
+  font-size: ${({ theme }) => theme.sizing.large};
   ::placeholder {
     color: ${({ theme }) => theme.colors.grey.g300};
   }
