@@ -8,6 +8,7 @@ import Title from "../../components/Title";
 import TextInput from "../../components/TextInput";
 import Popover from "../../components/Popover";
 import Output from "../../components/Output";
+import Button from "../../components/Button";
 
 interface ContainerProps {
   children: ReactNode;
@@ -46,6 +47,13 @@ const Content: FC<{ children?: ReactNode }> = styled.div`
   }
 `;
 
+const MainContent: FC<{ children?: ReactNode }> = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-top: ${({ theme }) => theme.spacing.xxlarge};
+`;
+
 const Spacer: FC = styled.div`
   flex: 1;
   display: flex;
@@ -70,13 +78,14 @@ const Footer: FC<{ children?: ReactNode }> = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.colors.primary.light};
   justify-content: flex-end;
-  margin-top: ${({ theme }) => theme.spacing.xxlarge};
+  margin-top: 8em;
 `;
 
 const HomePage: FC = () => {
   const BASE_URL = "https://wordsapiv1.p.rapidapi.com/words";
   const API_KEY = "7c3a9ce94emsh3e80a46aad536cbp1a1748jsn2e48a87d779c";
 
+  const [inputText, setInputText] = useState("");
   const [displayedText, setDisplayedText] = useState("");
   const [selectedText, setSelectedText] = useState("");
   const [selectedPosition, setSelectedPosition] = useState([0, 0]);
@@ -92,13 +101,27 @@ const HomePage: FC = () => {
     }
   }, [selectedText]);
 
+  useEffect(() => {
+    setDisplayedText(inputText);
+  }, [inputText]);
+
   const getTextInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDisplayedText(event.target.value);
+    setInputText(event.target.value);
   };
 
-  const getClipboardContent = async () => {
+  const setTextInputValue = (value: string) => {
+    const input = document.getElementById("input-text") as HTMLInputElement;
+    input.value = value;
+    setInputText(value);
+  };
+
+  const pasteClipboardContent = async () => {
     const clipboardContent = await navigator.clipboard.readText();
-    setDisplayedText(clipboardContent);
+    setTextInputValue(clipboardContent);
+  };
+
+  const copyToClipboard = async () => {
+    await navigator.clipboard.writeText(displayedText);
   };
 
   const getSelection = () => {
@@ -144,18 +167,31 @@ const HomePage: FC = () => {
       <Header />
       <Content>
         <Title />
-        <TextInput
-          placeholder="Type or paste your text here..."
-          onChange={getTextInput}
-          onButtonClick={getClipboardContent}
-        />
-        <Popover
-          selectedPosition={selectedPosition}
-          synonyms={synonyms}
-          updateWord={updateWord}
-          responseCode={responseCode}
-        />
-        <Output rawText={displayedText} getSelection={getSelection} />
+        <MainContent>
+          <TextInput
+            id="input-text"
+            placeholder="Type or paste your text here..."
+            buttonColor={inputText.length > 0 ? "light" : "dark"}
+            onChange={getTextInput}
+            onButtonClick={pasteClipboardContent}
+          />
+          <Popover
+            selectedPosition={selectedPosition}
+            synonyms={synonyms}
+            updateWord={updateWord}
+            responseCode={responseCode}
+          />
+          <Output rawText={displayedText} getSelection={getSelection} />
+          {displayedText.length > 0 ? (
+            <Button
+              text="Copy Results"
+              variant={inputText !== displayedText ? "filled" : "text"}
+              onClick={copyToClipboard}
+            />
+          ) : (
+            <div />
+          )}
+        </MainContent>
         <Spacer />
         <Footer>
           <Illustration />

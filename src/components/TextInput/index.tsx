@@ -19,10 +19,10 @@ const Container: FC<ContainerProps> = styled.div`
 `;
 
 interface InputProps {
+  id: any;
   placeholder?: string;
   type?: string;
   onChange?: Function;
-  onButtonClick?: Function;
 }
 
 const Input: FC<InputProps> = styled.input`
@@ -35,11 +35,21 @@ const Input: FC<InputProps> = styled.input`
   margin: 0 ${({ theme }) => theme.spacing.small};
 `;
 
-const TextInput: FC<InputProps> = ({ placeholder, type, onChange, onButtonClick }) => {
+interface TextInputProps {
+  id: string;
+  placeholder?: string;
+  defaultValue?: string;
+  type?: string;
+  buttonColor?: "dark" | "light";
+  onChange?: Function;
+  onButtonClick?: Function;
+}
+
+const TextInput: FC<TextInputProps> = ({ id, placeholder, type, buttonColor, onChange, onButtonClick }) => {
   return (
     <Container>
-      <Input placeholder={placeholder} type={type} onChange={onChange} />
-      <Button text="Paste" color="dark" onClick={onButtonClick} />
+      <Input id={id} placeholder={placeholder} type={type} onChange={onChange} />
+      <Button text="Paste" color={buttonColor} onClick={onButtonClick} />
     </Container>
   );
 };

@@ -15,7 +15,7 @@ const Container: FC<ContainerProps> = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid ${({ theme }) => theme.colors.grey.g500};
-  margin-top: ${({ theme }) => theme.spacing.large};
+  margin: ${({ theme }) => theme.spacing.large} 0;
   padding: ${({ theme }) => theme.spacing.large};
   border-radius: ${({ theme }) => theme.sizing.xxxsmall};
   div:first-child {
