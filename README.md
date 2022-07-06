@@ -35,6 +35,7 @@ As it is a very small project made on free time of 3 days, some things are prior
 ###### Non-priorities
 - Security
 - Responsivity
+- Robust state management (_e.g. Redux_)
 - Browser compatibility
 - Robust errors/exceptions handling
 - Linting (_e.g. ESLint_)
