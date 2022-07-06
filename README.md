@@ -21,8 +21,10 @@ Even more simple,
 3. With the feedback from the API, it fetches the response retrieving the synonyms (_success_), or the error message (_HTTP error or no synonyms found_).
 
 ## How to run it locally
-1. Clone the [main branch](https://github.com/rcstudiossa/words_sidnet/tree/main)
-2. run `yarn dev`
+1. Clone the [project](https://github.com/rcstudiossa/words_sidnet)
+2. Open the terminal in the project folder
+3. Run `yarn` or `npm install`
+4. Run `yarn dev` or `npm run dev`
 
 ## Scope
 As it is a very small project made on free time of 3 days, some things are priority but others are not :D
@@ -89,4 +91,5 @@ The Figma file will be available soon.
 
 
 Thank you!
+
 Rodrigo.
