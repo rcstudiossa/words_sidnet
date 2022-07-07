@@ -92,7 +92,7 @@ const SynonymText: FC<{ children?: ReactNode }> = styled.p`
   white-space: pre-line;
 `;
 
-const Loading: FC = styled.div`
+const Loading: FC<{ children?: ReactNode; "data-testid"?: string }> = styled.div`
   width: ${({ theme }) => theme.sizing.xxlarge};
   height: ${({ theme }) => theme.sizing.xxlarge};
   border: ${({ theme }) => theme.sizing.xxxsmall} solid;
@@ -175,7 +175,7 @@ const Popover: FC<PopoverProps> = ({ selectedPosition, synonyms, updateWord, res
     return (
       <Container position={selectedPosition} ref={containerRef} dataStatus={dataStatus}>
         {dataStatus === "loading" ? (
-          <Loading />
+          <Loading data-testid="popover-loading" />
         ) : dataStatus === "loaded" ? (
           <ul>
             {synonyms.map((synonym) => {

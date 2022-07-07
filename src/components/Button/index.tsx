@@ -6,6 +6,7 @@ import theme from "../../theme";
 
 interface ContainerProps {
   children: ReactNode;
+  "data-testid"?: string;
   color: string;
   variant?: string;
   margin?: string;
@@ -48,6 +49,7 @@ const Container: FC<ContainerProps> = styled("div")<ContainerProps>`
 
 interface TextProps {
   children: ReactNode;
+  "data-testid"?: string;
   textColor: string;
 }
 
@@ -65,7 +67,6 @@ interface ButtonProps {
 
 const Button: FC<ButtonProps> = ({ text, color, variant, margin, onClick }) => {
   let textColor = theme.colors.primary.dark;
-  let bgColor = theme.colors.primary.light;
 
   if (!color) {
     color = "dark";
@@ -75,17 +76,23 @@ const Button: FC<ButtonProps> = ({ text, color, variant, margin, onClick }) => {
   }
 
   if (variant === "text") {
-    bgColor = "transparent";
     textColor = theme.colors.primary.dark;
   }
   if (color === "dark") {
     textColor = theme.colors.white;
-    bgColor = theme.colors.primary.dark;
   }
 
   return (
-    <Container margin={margin} color={color} variant={variant} onClick={onClick}>
-      <Text textColor={textColor}>{text}</Text>
+    <Container
+      data-testid="button-container"
+      margin={margin}
+      color={color}
+      variant={variant}
+      onClick={onClick}
+    >
+      <Text data-testid="button-text" textColor={textColor}>
+        {text}
+      </Text>
     </Container>
   );
 };

@@ -14,6 +14,7 @@ const Container: FC<ContainerProps> = styled.div`
   width: 48em;
   display: flex;
   flex-direction: column;
+  background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.grey.g500};
   margin: ${({ theme }) => theme.spacing.large} 0;
   padding: ${({ theme }) => theme.spacing.large};
@@ -53,6 +54,7 @@ const InfoContainer: FC<InfoContainerProps> = styled("div")<InfoContainerProps>`
   ${({ theme, type }) =>
     type.length === 0 &&
     css`
+      background-color: ${theme.colors.white};
       margin-top: ${theme.spacing.xxsmall};
       padding: ${theme.spacing.xxsmall} ${theme.spacing.large};
       border: 1px solid ${theme.colors.grey.g500};

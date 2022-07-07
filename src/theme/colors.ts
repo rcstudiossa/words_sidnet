@@ -10,6 +10,7 @@ const colors = {
     g300: "#BDBDBD",
     g400: "#E0E0E0",
     g500: "#F2F2F2",
+    g600: "#FCFCFC",
   },
   white: "#FFFFFF",
   auxiliary: {

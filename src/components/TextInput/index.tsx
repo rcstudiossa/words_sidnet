@@ -11,11 +11,11 @@ const Container: FC<ContainerProps> = styled.div`
   display: flex;
   flex-direction: row;
   width: 48em;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.grey.g600};
   padding: ${({ theme }) => theme.spacing.xsmall};
   align-items: center;
   border-radius: ${({ theme }) => theme.sizing.xxxsmall};
-  border: 1px solid ${({ theme }) => theme.colors.grey.g400};
+  border: 1px solid ${({ theme }) => theme.colors.grey.g500};
 `;
 
 interface InputProps {
